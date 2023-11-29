@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="js/bootstrap.min.js">
+    <link rel="stylesheet" href="css/master.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <section class="container-fluid container-xxl  d-flex justify-content-center align-items-center sec1">
+        <div class="col-8 mt-5">
+            <figure class="d-flex justify-content-center">
+                <img src="img/Screenshot (70).png" alt="">
+            </figure>
+            <div class="_titel d-flex justify-content-center">
+                <h1>Whoop, it's Friday 🍻</h1>
+            </div>
+            <div class="todo d-flex justify-content-center mt-3 ">
+                <input id="inp" type="text" placeholder="✍️Add item...">
+                <button id="btn"><i class="bi bi-plus"></i></button>
+            </div>
+            <!-- <h4 class="_fals text-center mt-4 opacity-0">Oops!please ,inter your number</h4> -->
+            <ul id="list" class="mt-5 "></ul>
+            <h3 class="text-center">Made with ❤️ by <a href="">Quentin</a></h3>
+            <h2 class="text-center">Thanks to <strong>Antoine</strong> for helping ! <strong>🚀 Todost</strong></h2>
+        </div>
+    </section>
+    <script>
+        let inp = document.getElementById('inp')
+        let _error= document.getElementsByClassName('_fals')
+        document.getElementById('btn').addEventListener('click',()=>{
+            let temp = inp.value
+            if(
+                (temp == "")||
+                (temp == " ")||
+                (temp == "/n")||
+                (temp == null) ||
+                (temp.length <= 3)
+            ){
+                alert("Oops!please ,inter your number")
+            }else{
+                let _li = document.createElement('li')
+                _li.classList.add('menu')
+                _li.innerHTML=`
+                <input onclick='_del(this)' type='checkbox'/>
+                    <h3 class="d-flex col-12"><span></span><strong contenteditable='true'>${temp}</strong></h3>
+                    <button onclick='_close(this)'><i class="bi bi-x-lg"></i></button>
+                `
+                document.getElementById('list').appendChild(_li)
+                inp.value=null
+                inp.focus
+            }
+        })
+        const _del =(s) =>{
+            console.log(s.checked)
+            let _check = s.nextElementSibling.children
+           if(s.checked){
+            _check[0].style.width='100%'
+           }else{
+            _check[0].style.width='0%'
+           }
+        }
+        const _close = (s) =>{
+            s.parentElement.classList.add('close')
+            setTimeout(() => {
+                s.parentElement.remove()
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
